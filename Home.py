@@ -34,5 +34,13 @@ fig.update_traces(
     marker_line_width=2,
     marker_line_color='black'
 )
-
+fig.update_layout(
+    legend=dict(
+        orientation="h",  # Horizontal legend
+        yanchor="bottom",  # Anchor the legend from the bottom
+        y=1,  # Position the legend at the top
+        xanchor="center",  # Center the legend horizontally
+        x=0.5  # Set it in the middle (horizontally)
+    )
+)
 st.plotly_chart(fig,use_container_width=True)
