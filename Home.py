@@ -4,8 +4,8 @@ import json
 import plotly.express as px
 
 st.set_page_config(
-    page_title="Chandigarh Tricity Real Estate Analytics App",
-    page_icon="👋",
+    page_title="Chandigarh Tricity Real Estate App",
+    page_icon="🏠"
 )
 
 st.markdown(
@@ -33,18 +33,15 @@ tricity_df = pd.DataFrame(tricity_df)
 fig = px.choropleth_mapbox(tricity_df, locations="id", geojson=tricity_map, color="City",
                            mapbox_style="open-street-map", center={"lat": 30.689281, "lon": 76.786950},
                            featureidkey="properties.Name", width=700, height=700,
-                           zoom=10.25, opacity=0.3, color_discrete_sequence=["red", "yellow", "blue"])
+                           zoom=10.25, opacity=0.5, color_discrete_sequence=["red", "yellow", "blue"])
 fig.update_traces(
     marker_line_width=2,
     marker_line_color='black'
 )
 fig.update_layout(
     legend=dict(
-        orientation="h",  # Horizontal legend
-        yanchor="bottom",  # Anchor the legend from the bottom
-        y=1,  # Position the legend at the top
-        xanchor="center",  # Center the legend horizontally
-        x=0.5  # Set it in the middle (horizontally)
+        orientation="h", yanchor="bottom", y=1,
+        xanchor="center", x=0.5
     )
 )
 st.plotly_chart(fig, use_container_width=True)

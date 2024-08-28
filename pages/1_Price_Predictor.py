@@ -3,7 +3,11 @@ import pickle
 import pandas as pd
 import numpy as np
 
-st.set_page_config(page_title="Price Predictor")
+st.set_page_config(
+    page_title="Property Price Predictor",
+    page_icon="🏠"
+)
+
 
 with open('data/df.pkl', 'rb') as file:
     df = pickle.load(file)
@@ -11,7 +15,10 @@ with open('data/df.pkl', 'rb') as file:
 with open('model_pipeline.pkl', 'rb') as file:
     model = pickle.load(file)
 
-st.title("House Price Predictor")
+st.markdown(
+    "<h1 style='text-align: center;'>Property Price Predictor</h1>",
+    unsafe_allow_html=True
+)
 # Features
 property_type = st.selectbox('Property Type', ['House/Villa', 'Flat/Apartment', 'Builder Floor'])
 city = st.selectbox('City', ['Chandigarh', 'Mohali', 'Panchkula'])

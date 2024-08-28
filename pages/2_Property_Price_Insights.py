@@ -2,6 +2,12 @@ import streamlit as st
 import pickle
 import plotly.express as px
 
+st.set_page_config(
+    page_title="Property Price Insights",
+    page_icon="🏠"
+)
+
+
 # Loading GeoJSON
 with open('geojson/sector_json.pkl', 'rb') as file:
     tricity_map = pickle.load(file)
@@ -18,6 +24,7 @@ map_params = {
     "Mohali": [30.699839, 76.747052, 10.4],
     "Panchkula": [30.705016, 76.877993, 11.35]
 }
+
 map_group = df.groupby(['property_type', 'City'])
 
 st.markdown(
