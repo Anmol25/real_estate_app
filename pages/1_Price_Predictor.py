@@ -8,7 +8,6 @@ st.set_page_config(
     page_icon="🏠"
 )
 
-
 with open('data/df.pkl', 'rb') as file:
     df = pickle.load(file)
 
@@ -19,21 +18,44 @@ st.markdown(
     "<h1 style='text-align: center;'>Property Price Predictor</h1>",
     unsafe_allow_html=True
 )
-# Features
-property_type = st.selectbox('Property Type', ['House/Villa', 'Flat/Apartment', 'Builder Floor'])
-city = st.selectbox('City', ['Chandigarh', 'Mohali', 'Panchkula'])
-sector = st.selectbox('Sector', df[df['City'] == city]['Sector'].unique().tolist())
+
+# Property Details
+det1, det2, det3 = st.columns(3)
+
+with det1:
+    property_type = st.selectbox('Property Type', ['House/Villa', 'Flat/Apartment', 'Builder Floor'])
+with det2:
+    city = st.selectbox('City', ['Chandigarh', 'Mohali', 'Panchkula'])
+with det3:
+    sector = st.selectbox('Sector', df[df['City'] == city]['Sector'].unique().tolist())
+
+# Property Configurations
 st.html("<h3>Property Configurations</h3>")
-area = float(
-    np.log(float(st.number_input("Plot Area(Sq.ft)" if property_type == 'House/Villa' else "Built Up Area(Sq.ft)",
-                                 min_value=100.00))))
-bedRoom = int(st.selectbox("BedRooms", sorted(df['bedRoom'].unique())))
-bathRoom = int(st.selectbox("BathRooms", sorted(df['bathroom'].unique())))
-balcony = st.selectbox("Balcony", ['1', '2', '3', 'More than 3'])
-if balcony == 'More than 3':
-    balcony = 4
-else:
-    balcony = int(balcony)
+
+propconf1, propconf2, propconf3 = st.columns(3)
+
+with propconf1:
+    area = float(
+        np.log(float(st.number_input("Plot Area(Sq.ft)" if property_type == 'House/Villa' else "Built Up Area(Sq.ft)",
+                                     min_value=100.00))))
+with propconf2:
+    bedRoom = int(st.selectbox("BedRooms", sorted(df['bedRoom'].unique())))
+
+with propconf3:
+    bathRoom = int(st.selectbox("BathRooms", sorted(df['bathroom'].unique())))
+
+propconf4, propconf5, propconf6 = st.columns(3)
+with propconf4:
+    balcony = st.selectbox("Balcony", ['1', '2', '3', 'More than 3'])
+    if balcony == 'More than 3':
+        balcony = 4
+    else:
+        balcony = int(balcony)
+# parking
+with propconf5:
+    CoveredParking = int(st.selectbox("Covered Parking", list(range(0, 11))))
+with propconf6:
+    OpenParking = int(st.selectbox("Open Parking", list(range(0, 11))))
 
 # Floor Features
 floor_rise_dict = {
@@ -50,14 +72,18 @@ floor_no_dict = {
     'Ultra-High-Rise': (["Basement", "Ground"] + list(range(1, 46)))
 }
 
+floor1, floor2 = st.columns(2)
+
 if property_type == 'House/Villa':
     FloorNo = 0
     FloorRise = "Low-Rise"
 else:
-    FloorRise = st.selectbox("Floor Rise",
-                             ["Low Rise (0-4)", "Mid Rise (4-12)", "High Rise (13-40)", "Ultra High Rise (40+)"])
-    FloorRise = floor_rise_dict[FloorRise]
-    FloorNo = st.selectbox("Floor No.", floor_no_dict[FloorRise])
+    with floor1:
+        FloorRise = st.selectbox("Floor Rise",
+                                 ["Low Rise (0-4)", "Mid Rise (4-12)", "High Rise (13-40)", "Ultra High Rise (40+)"])
+        FloorRise = floor_rise_dict[FloorRise]
+    with floor2:
+        FloorNo = st.selectbox("Floor No.", floor_no_dict[FloorRise])
 
 if FloorNo == "Basement":
     FloorNo = -1
@@ -65,6 +91,9 @@ elif FloorNo == "Ground":
     FloorNo = 0
 else:
     FloorNo = int(FloorNo)
+
+# Features
+st.html("<h3>Features</h3>")
 
 # Property Age
 age_dict = {
@@ -74,22 +103,21 @@ age_dict = {
     "New Property (0-1 Years)": "New",
     "Under Construction": "UndConst"
 }
-# parking
-CoveredParking = int(st.selectbox("Covered Parking", list(range(0, 11))))
-OpenParking = int(st.selectbox("Open Parking", list(range(0, 11))))
 
 agePossession = st.selectbox("Property Age", list(age_dict.keys()))
 agePossession = age_dict[agePossession]
 
-# Features
-st.html("<h3>Features</h3>")
-facing = st.selectbox("Facing", sorted(df['facing'].unique()))
-Flooring = st.selectbox("Flooring", df['Flooring'].value_counts().index)
-gated = st.selectbox("Gated Community", ['Yes', 'No'])
-Furnishing = st.selectbox("Furnishing", ['Semifurnished', 'Unfurnished', 'Furnished'])
+feat1, feat2, feat3, feat4 = st.columns(4)
+with feat1:
+    facing = st.selectbox("Facing", sorted(df['facing'].unique()))
+with feat2:
+    Flooring = st.selectbox("Flooring", df['Flooring'].value_counts().index)
+with feat3:
+    gated = st.selectbox("Gated Community", ['Yes', 'No'])
+with feat4:
+    Furnishing = st.selectbox("Furnishing", ['Semifurnished', 'Unfurnished', 'Furnished'])
 
 # water
-
 st.markdown("Water Supply")
 water1, water2, water3 = st.columns(3)
 with water1:
@@ -99,10 +127,13 @@ with water2:
 with water3:
     bwell = (1 if st.checkbox("Borewell/Tank") else 0)
 
-# PowerBackup
-pwrBkp = st.selectbox("Power Backup", ['Full', 'Partial', 'No'])
-facilities = st.selectbox("Facilities", ["Basic", "Standard", "Premium", "Luxurious"])
+feat5, feat6 = st.columns(2)
+with feat5:
+    pwrBkp = st.selectbox("Power Backup", ['Full', 'Partial', 'No'])
+with feat6:
+    facilities = st.selectbox("Facilities", ["Basic", "Standard", "Premium", "Luxurious"])
 
+# Predict
 if st.button('Predict', type="primary"):
     data = [[property_type, sector, city, area, bedRoom, bathRoom, balcony, facing,
              FloorNo, FloorRise, agePossession, Flooring, gated, Furnishing, CoveredParking, OpenParking,

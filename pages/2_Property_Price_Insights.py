@@ -33,8 +33,11 @@ st.markdown(
 )
 
 # Getting Input for map
-property_type = st.selectbox('Property Type', ['House/Villa', 'Flat/Apartment'])
-city = st.selectbox('City', ['Tricity', 'Chandigarh', 'Mohali', 'Panchkula'])
+input1,input2 = st.columns(2)
+with input1:
+    property_type = st.selectbox('Property Type', ['House/Villa', 'Flat/Apartment'])
+with input2:
+    city = st.selectbox('City', ['Tricity', 'Chandigarh', 'Mohali', 'Panchkula'])
 
 # Ploting map
 if city == "Tricity":
