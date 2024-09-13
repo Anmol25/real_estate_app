@@ -8,10 +8,10 @@ st.set_page_config(
     page_icon="🏠"
 )
 
-with open('data/df.pkl', 'rb') as file:
+with open('data/df_v2.pkl', 'rb') as file:
     df = pickle.load(file)
 
-with open('model_pipeline.pkl', 'rb') as file:
+with open('model_pipeline_v2.pkl', 'rb') as file:
     model = pickle.load(file)
 
 st.markdown(
@@ -104,30 +104,19 @@ age_dict = {
     "Under Construction": "UndConst"
 }
 
-agePossession = st.selectbox("Property Age", list(age_dict.keys()))
-agePossession = age_dict[agePossession]
-
-feat1, feat2, feat3, feat4 = st.columns(4)
+feat1, feat2, feat3 = st.columns(3)
 with feat1:
-    facing = st.selectbox("Facing", sorted(df['facing'].unique()))
+    agePossession = st.selectbox("Property Age", list(age_dict.keys()))
+    agePossession = age_dict[agePossession]
 with feat2:
-    Flooring = st.selectbox("Flooring", df['Flooring'].value_counts().index)
+    facing = st.selectbox("Facing", sorted(df['facing'].unique()))
 with feat3:
-    gated = st.selectbox("Gated Community", ['Yes', 'No'])
+    Flooring = st.selectbox("Flooring", df['Flooring'].value_counts().index)
+
+
+feat4, feat5, feat6 = st.columns(3)
 with feat4:
     Furnishing = st.selectbox("Furnishing", ['Semifurnished', 'Unfurnished', 'Furnished'])
-
-# water
-st.markdown("Water Supply")
-water1, water2, water3 = st.columns(3)
-with water1:
-    water_247 = (1 if st.checkbox("24/7 Water") else 0)
-with water2:
-    mc_water = (1 if st.checkbox("Municipal Corporation") else 0)
-with water3:
-    bwell = (1 if st.checkbox("Borewell/Tank") else 0)
-
-feat5, feat6 = st.columns(2)
 with feat5:
     pwrBkp = st.selectbox("Power Backup", ['Full', 'Partial', 'No'])
 with feat6:
@@ -136,14 +125,13 @@ with feat6:
 # Predict
 if st.button('Predict', type="primary"):
     data = [[property_type, sector, city, area, bedRoom, bathRoom, balcony, facing,
-             FloorNo, FloorRise, agePossession, Flooring, gated, Furnishing, CoveredParking, OpenParking,
-             water_247, mc_water, bwell, pwrBkp, facilities]]
+             FloorNo, FloorRise, agePossession, Flooring, Furnishing, CoveredParking, OpenParking,
+             pwrBkp, facilities]]
 
     columns = ['property_type', 'Sector', 'City', 'Area', 'bedRoom', 'bathroom',
                'balcony', 'facing', 'FloorNo', 'FloorRise', 'agePossession',
-               'Flooring', 'GatedCommunity', 'Furnishing', 'CoveredParking',
-               'OpenParking', '24*7 Water', 'MuniCorp Water', 'Borewell/Tank',
-               'PowerBackup', 'Facilities Categories']
+               'Flooring', 'Furnishing', 'CoveredParking',
+               'OpenParking', 'PowerBackup', 'Facilities Categories']
 
     one_df = pd.DataFrame(data, columns=columns)
     base = np.expm1(model.predict(one_df))[0]
