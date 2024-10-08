@@ -8,7 +8,7 @@ st.set_page_config(
     page_icon="🏠"
 )
 
-with open('data/df_v2.pkl', 'rb') as file:
+with open('data/df_v3.pkl', 'rb') as file:
     df = pickle.load(file)
 
 with open('model_pipeline_v2.pkl', 'rb') as file:
