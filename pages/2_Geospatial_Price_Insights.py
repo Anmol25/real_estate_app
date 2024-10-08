@@ -3,7 +3,7 @@ import pickle
 import plotly.express as px
 
 st.set_page_config(
-    page_title="Property Price Insights",
+    page_title="Geospatial Price Insights",
     page_icon="🏠"
 )
 
@@ -28,7 +28,7 @@ map_params = {
 map_group = df.groupby(['property_type', 'City'])
 
 st.markdown(
-    "<h1 style='text-align: center;'>Property Price Insights</h1>",
+    "<h1 style='text-align: center;'>Geospatial Price Insights</h1>",
     unsafe_allow_html=True
 )
 
