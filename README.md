@@ -7,7 +7,7 @@ This application utilizes machine learning to predict house prices in the Chandi
 
 ### Price Predictor Module
 
-At the heart of the application is the house price prediction model, which utilizes the CatBoost algorithm. With an impressive R² score of 0.9624 and Mean Absolute Error (MAE) of 0.0927 Cr INR, the model ensures high accuracy in predicting house prices. The predictions are based on various critical features such as location, plot area, property type, and more. This module is designed to offer reliable price estimates, empowering users with data-driven insights when evaluating real estate properties.
+At the heart of the application is the house price prediction model, which utilizes the CatBoost algorithm. With an impressive R² score of 0.9615 and Mean Absolute Error (MAE) of 0.0915 Cr INR, the model ensures high accuracy in predicting house prices. The predictions are based on various critical features such as location, plot area, property type, and more. This module is designed to offer reliable price estimates, empowering users with data-driven insights when evaluating real estate properties.
 
 ### Price Insights Module
 
