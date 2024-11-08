@@ -171,7 +171,7 @@ def main():
     )
 
     # load dataframe and model
-    df = load_pickle('data/df_v3.pkl')
+    df = load_pickle('data/bin/df_v3.pkl')
     model = load_pickle('model_pipeline_v2.pkl')
 
     #Page Heading

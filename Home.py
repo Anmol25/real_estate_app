@@ -5,7 +5,7 @@ import plotly.express as px
 
 def load_data() -> tuple:
     """Load geojson of map boundaries and create datapoints for plotting"""
-    map = json.load(open("geojson/tricity.geojson", "r"))
+    map = json.load(open("data/geojson/tricity.geojson", "r"))
     df = {
         "City": ["Chandigarh", "Panchkula", "Mohali (incl. adj areas)"],
         "id": ["Chandigarh", "Panchkula", "Mohali"]

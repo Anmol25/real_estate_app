@@ -48,8 +48,8 @@ def main():
     )
 
     # Load GeoJSON and Map_data and Coordinates
-    tricity_map = load_pickle('geojson/sector_json.pkl')
-    df = load_pickle('data/map_df.pkl')
+    tricity_map = load_pickle('data/geojson/sector_json.pkl')
+    df = load_pickle('data/bin/map_df.pkl')
     map_params = mapConfigs()
     
     # Grouping data for plotting for single city
