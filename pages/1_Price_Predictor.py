@@ -172,7 +172,8 @@ def main():
 
     # load dataframe and model
     df = load_pickle('data/bin/df_v3.pkl')
-    model = load_pickle('model_pipeline_v2.pkl')
+    #model = load_pickle('model_pipeline_v2.pkl')
+    model = load_pickle('bin/model.pkl')
 
     #Page Heading
     st.markdown(

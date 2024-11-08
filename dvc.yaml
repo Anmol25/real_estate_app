@@ -1,0 +1,16 @@
+stages:
+  data_preprocessing:
+    cmd: python src/data/data_preprocessing.py
+    deps:
+    - data/raw
+    outs:
+    - data/processed
+  model_building:
+    cmd: python src/models/model_building.py
+    deps:
+    - data/processed
+    - src/models/model_building.py
+    outs:
+    - models
+    metrics:
+    - reports/metrics.json
