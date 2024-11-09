@@ -1,3 +1,5 @@
 /models
 /reports
 catboost_info
+logs
+data

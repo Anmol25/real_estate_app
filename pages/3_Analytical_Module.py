@@ -99,8 +99,8 @@ def main():
                 "previous modules.</p>", unsafe_allow_html=True)
 
     # Load main dataframe and suburst dataframe
-    main_df = load_pickle('data/bin/df_v3.pkl')
-    sb_df = load_pickle('data/bin/sunburst_df.pkl')
+    main_df = load_pickle('assets/bin/df_v3.pkl')
+    sb_df = load_pickle('assets/bin/sunburst_df.pkl')
     
 
     ## Area VS Price Scatter Plot

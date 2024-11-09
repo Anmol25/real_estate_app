@@ -24,12 +24,12 @@ stages:
       nfiles: 1
     - path: src/models/model_building.py
       hash: md5
-      md5: dfebd6cffb6fedc4dec097bea448a3bd
-      size: 3441
+      md5: 0b7d36c5b29b3a9887982b0f4288e5c0
+      size: 6045
     outs:
     - path: models
       hash: md5
-      md5: f9bb9fea50e6f6bd10c4257b0ca3c57d.dir
+      md5: 4c1b34fba5cf8bd9f2272c36389498e1.dir
       size: 4290031
       nfiles: 1
     - path: reports/metrics.json
