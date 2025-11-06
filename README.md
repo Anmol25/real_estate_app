@@ -13,8 +13,24 @@ At the heart of the application is the house price prediction model, which utili
 
 The Price Insights Module offers a powerful tool for geospatial analysis of house prices. Leveraging Plotly for visualization, it generates an interactive Choropleth map that illustrates price per square foot across different sectors in the Tricity region. This map enables users to explore price trends visually and interactively, offering valuable insights for real estate investments and pricing strategies. The module adds depth to the application by providing users with data-driven insights into local real estate market dynamics.
 
+## Project Snapshots
 
+<p align="Center"><strong>Home</strong></p>
 
+![Home](images/home.png)
+
+<p align="Center"><strong>Price Predictor</strong></p>
+
+![Home](images/price%20predictor.png)
+
+<p align="Center"><strong>Geospatial Price Insights Module</strong></p>
+
+![Home](images/Geospatial%20Price%20Insights.png)
+
+<p align="Center"><strong>Analytical Module</strong></p>
+
+<p align="center"><img src="images/analytical 1.png" width=50% alt="For You"><img src="images/Analytical 2.png" width=50% alt="News"></p>
+<p align="center"><img src="images/analytical 3.png" width=50% alt="For You"><img src="images/Analytical 4.png" width=50% alt="News"></p>
 
 ## Run Locally
 
